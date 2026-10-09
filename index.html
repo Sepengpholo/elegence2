@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090a0d">
+<title>Elegance — Intelligent Modern Living</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08090c;--panel:#111318;--panel2:#171a20;--text:#f7f5ef;--muted:#a7abb5;
+  --gold:#e8c76a;--gold2:#b99532;--line:rgba(255,255,255,.09);
+  --good:#77e2ae;--shadow:0 25px 80px rgba(0,0,0,.35);--radius:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:radial-gradient(circle at 80% 0%,#22210f 0,transparent 28%),var(--bg);color:var(--text);line-height:1.5}
+body.light{--bg:#f4f2ed;--panel:#fff;--panel2:#eeece5;--text:#171717;--muted:#666;--line:rgba(0,0,0,.1);background:#f4f2ed}
+a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer;color:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.container{width:min(1240px,calc(100% - 40px));margin:auto}
+.nav{position:fixed;z-index:100;top:0;left:0;right:0;padding:14px 0;transition:.35s}
+.nav.scrolled{background:rgba(8,9,12,.78);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.light .nav.scrolled{background:rgba(244,242,237,.85)}
+.nav-inner{height:58px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:Manrope;font-weight:800;font-size:25px;letter-spacing:-1.5px}.logo i{color:var(--gold);font-style:normal}
+.navlinks{display:flex;gap:30px;color:var(--muted);font-size:14px}
+.navlinks a:hover{color:var(--gold)}
+.actions{display:flex;gap:8px;align-items:center}
+.icon-btn{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.035);display:grid;place-items:center}
+.icon-btn:hover{border-color:rgba(232,199,106,.5);color:var(--gold)}
+.badge{position:absolute;top:-3px;right:-1px;background:var(--gold);color:#111;width:17px;height:17px;border-radius:50%;font-size:10px;font-weight:800;display:grid;place-items:center}
+.hero{min-height:780px;height:100svh;position:relative;overflow:hidden;display:flex;align-items:flex-end}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease}
+.hero-slide.active{opacity:1}
+.hero-slide img{filter:saturate(.82)}
+.hero-slide:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,5,7,.9),rgba(4,5,7,.3) 58%,rgba(4,5,7,.58)),linear-gradient(0deg,#08090c,transparent 40%)}
+.hero-content{position:relative;z-index:2;padding:0 0 90px;max-width:720px}
+.eyebrow{font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px}
+h1,h2,h3{font-family:Manrope;letter-spacing:-2px}
+h1{font-size:clamp(48px,7vw,94px);line-height:.95;max-width:760px}
+.hero-copy{color:#d4d5d8;max-width:580px;font-size:18px;margin:24px 0 32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;padding:14px 21px;font-size:14px;font-weight:700;border:1px solid transparent;transition:.25s}
+.btn.gold{background:linear-gradient(135deg,#f1d477,#cda83c);color:#15120a}.btn.gold:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(232,199,106,.18)}
+.btn.ghost{border-color:var(--line);background:rgba(255,255,255,.05);backdrop-filter:blur(12px)}
+.btn.ghost:hover{border-color:rgba(232,199,106,.45)}
+.hero-controls{position:absolute;right:40px;bottom:88px;z-index:3;display:flex;gap:8px}
+.dot{width:34px;height:4px;border:0;border-radius:99px;background:rgba(255,255,255,.25);overflow:hidden}
+.dot.active{background:var(--gold)}
+.marquee{border-block:1px solid var(--line);background:rgba(255,255,255,.025);overflow:hidden}
+.marquee-track{display:flex;gap:65px;white-space:nowrap;width:max-content;padding:17px 0;color:var(--muted);font-size:12px;letter-spacing:.1em;text-transform:uppercase;animation:marquee 28s linear infinite}
+.marquee b{color:var(--gold)}@keyframes marquee{to{transform:translateX(-50%)}}
+section{padding:100px 0}.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:38px}
+.section-head h2{font-size:clamp(34px,5vw,56px);line-height:1}.section-head p{max-width:430px;color:var(--muted);font-size:14px}
+.auto-stage{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}
+.stage-main{min-height:520px;position:relative;border-radius:var(--radius);overflow:hidden;background:var(--panel);border:1px solid var(--line)}
+.stage-main img{position:absolute;inset:0}
+.stage-main:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.9),transparent 65%)}
+.stage-info{position:absolute;z-index:2;left:34px;right:34px;bottom:32px}
+.stage-info h3{font-size:38px;margin-bottom:8px}.stage-info p{color:#d0d1d3;max-width:520px;font-size:14px}
+.stage-side{display:grid;grid-template-rows:1fr 1fr;gap:18px}
+.mini{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);min-height:251px;background:var(--panel)}
+.mini img{position:absolute;inset:0;transition:.6s}.mini:hover img{transform:scale(1.05)}
+.mini:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.8),transparent 70%)}
+.mini-info{position:absolute;z-index:2;left:24px;bottom:20px}.mini-info span{color:var(--gold);font-size:11px;text-transform:uppercase;letter-spacing:.16em}.mini-info h3{font-size:24px;margin-top:4px}
+.toggle-row{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:12px}.switch{width:48px;height:27px;border-radius:99px;background:#292d34;border:1px solid var(--line);padding:3px}.switch:after{content:"";display:block;width:19px;height:19px;background:#fff;border-radius:50%;transition:.3s}.switch.on{background:var(--gold)}.switch.on:after{transform:translateX(20px);background:#111}
+.filters{display:flex;gap:8px;overflow:auto;padding-bottom:8px;margin-bottom:25px}.filter{white-space:nowrap;border:1px solid var(--line);background:var(--panel);padding:10px 15px;border-radius:999px;color:var(--muted);font-size:13px}.filter.active,.filter:hover{background:var(--gold);border-color:var(--gold);color:#111}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.product{cursor:pointer;min-width:0}.product-image{aspect-ratio:4/5;border-radius:20px;overflow:hidden;position:relative;background:var(--panel2);border:1px solid var(--line)}.product-image img{transition:.6s}.product:hover img{transform:scale(1.055)}.pill{position:absolute;top:12px;left:12px;background:rgba(8,9,12,.76);backdrop-filter:blur(8px);padding:6px 9px;border-radius:999px;font-size:10px;font-weight:700;color:var(--gold)}.heart{position:absolute;right:12px;top:12px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(8,9,12,.65);border:1px solid rgba(255,255,255,.12)}
+.product h3{font-family:"DM Sans";font-size:14px;letter-spacing:0;margin:13px 2px 4px;line-height:1.35}.price{font-size:14px;color:var(--gold);font-weight:700}.old{color:var(--muted);text-decoration:line-through;font-size:12px;margin-right:6px}
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}.feature-media{height:580px;border-radius:30px;overflow:hidden;border:1px solid var(--line)}.feature-copy h2{font-size:clamp(38px,5vw,65px);line-height:1;margin-bottom:20px}.feature-copy p{color:var(--muted);max-width:500px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:35px}.stat{padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--panel)}.stat b{display:block;font-family:Manrope;font-size:22px;color:var(--gold)}.stat span{font-size:11px;color:var(--muted)}
+.newsletter{border:1px solid var(--line);background:linear-gradient(135deg,rgba(232,199,106,.11),rgba(255,255,255,.025));border-radius:30px;padding:60px;display:flex;justify-content:space-between;align-items:center;gap:35px}.newsletter h2{font-size:40px}.newsletter p{color:var(--muted);font-size:14px;margin-top:8px}.email{display:flex;gap:8px;min-width:min(440px,100%)}.email input{width:100%;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;padding:14px 18px;outline:none}.email input:focus{border-color:var(--gold)}
+footer{border-top:1px solid var(--line);padding:50px 0;color:var(--muted);font-size:13px}.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:35px}.footer-grid h4{color:var(--text);margin-bottom:12px}.footer-grid a{display:block;margin:7px 0}.footer-grid a:hover{color:var(--gold)}
+.modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:18px}.modal.open{display:flex}.backdrop{position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(14px)}.modal-card{position:relative;z-index:1;width:min(900px,100%);max-height:90vh;overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow)}.modal-grid{display:grid;grid-template-columns:1fr 1fr}.modal-img{min-height:420px}.modal-copy{padding:38px}.close{position:absolute;right:16px;top:16px;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.4);z-index:3}
+.drawer{position:fixed;right:0;top:0;bottom:0;width:min(430px,100%);background:var(--panel);z-index:190;transform:translateX(105%);transition:.35s;border-left:1px solid var(--line);box-shadow:var(--shadow);padding:25px;display:flex;flex-direction:column}.drawer.open{transform:translateX(0)}.drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.cart-items{overflow:auto;flex:1}.cart-row{display:grid;grid-template-columns:65px 1fr auto;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.cart-row img{width:65px;height:75px;border-radius:12px}.cart-row small{color:var(--muted)}.total{padding-top:20px;border-top:1px solid var(--line);margin-top:15px}.total-line{display:flex;justify-content:space-between;font-size:18px;margin-bottom:16px}
+.search{position:fixed;inset:0;z-index:210;display:none;align-items:flex-start;justify-content:center;padding-top:110px}.search.open{display:flex}.search-box{position:relative;z-index:1;width:min(700px,calc(100% - 30px));background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:var(--shadow)}.search-box input{width:100%;background:transparent;border:0;outline:0;color:var(--text);font-size:24px}.results{margin-top:12px;display:grid;gap:6px}.result{padding:11px;border-radius:12px}.result:hover{background:var(--panel2)}
+.mobile-menu{display:none}
+@media(max-width:900px){.navlinks{display:none}.mobile-menu{display:grid}.auto-stage,.feature{grid-template-columns:1fr}.stage-side{grid-template-columns:1fr 1fr;grid-template-rows:1fr}.grid{grid-template-columns:repeat(2,1fr)}.newsletter{padding:35px;display:block}.email{margin-top:22px}.footer-grid{grid-template-columns:1fr 1fr}.hero-controls{right:20px}.hero-content{padding-bottom:65px}}
+@media(max-width:560px){.container{width:min(100% - 28px,1240px)}section{padding:70px 0}.hero{min-height:720px}.hero-copy{font-size:16px}.stage-main{min-height:430px}.stage-info{left:22px;right:22px;bottom:23px}.stage-info h3{font-size:29px}.stage-side{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr;gap:12px}.product-image{border-radius:15px}.feature-media{height:420px}.stats{grid-template-columns:1fr}.newsletter h2{font-size:31px}.email{min-width:0;flex-direction:column}.footer-grid{grid-template-columns:1fr 1fr}.modal-grid{grid-template-columns:1fr}.modal-img{min-height:300px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#">Elegance<span><i>.</i></span></a>
+    <div class="navlinks">
+      <a href="#discover">Discover</a><a href="#beauty">Beauty</a><a href="#winter">Winter</a><a href="#home">Home</a><a href="#tech">Tech</a>
+    </div>
+    <div class="actions">
+      <button class="icon-btn" id="searchBtn" aria-label="Search">⌕</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">☼</button>
+      <button class="icon-btn" id="cartBtn" aria-label="Cart" style="position:relative">⌑<span class="badge" id="cartCount">0</span></button>
+      <button class="icon-btn mobile-menu" id="mobileBtn">☰</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-slide active"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=2200&q=85" alt="Beauty products and cosmetics"></div>
+  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=2200&q=85" alt="Modern winter fashion"></div>
+  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=2200&q=85" alt="Modern elegant home interior"></div>
+  <div class="hero-slide"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=2200&q=85" alt="Modern technology and gadgets"></div>
+  <div class="container hero-content">
+    <div class="eyebrow" id="heroEyebrow">01 / Beauty intelligence</div>
+    <h1 id="heroTitle">Better rituals.<br>Smarter living.</h1>
+    <p class="hero-copy" id="heroCopy">A curated universe of useful technology, elevated personal care, warm essentials and design-led home pieces.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="#discover" class="btn gold">Explore intelligently →</a>
+      <a href="#tech" class="btn ghost">See smart tech</a>
+    </div>
+  </div>
+  <div class="hero-controls" id="heroControls"></div>
+</header>
+
+<div class="marquee"><div class="marquee-track">
+  <span><b>SMART CURATION</b> products matched to their purpose</span><span>•</span>
+  <span><b>ZAR PRICING</b> built for South African shoppers</span><span>•</span>
+  <span><b>AUTO DISCOVERY</b> categories rotate while you browse</span><span>•</span>
+  <span><b>SMART CURATION</b> products matched to their purpose</span><span>•</span>
+  <span><b>ZAR PRICING</b> built for South African shoppers</span>
+</div></div>
+
+<main>
+<section id="discover">
+<div class="container">
+  <div class="section-head">
+    <div><div class="eyebrow">Live collection</div><h2>Discover what<br>fits your world.</h2></div>
+    <div>
+      <div class="toggle-row">Auto-switch collections <button class="switch on" id="autoSwitch" aria-label="Toggle automatic collection switching"></button></div>
+      <p style="margin-top:14px">The showcase automatically rotates between categories. Pause it whenever you want to explore manually.</p>
+    </div>
+  </div>
+  <div class="auto-stage">
+    <div class="stage-main" id="stageMain">
+      <img id="stageImage" src="" alt="">
+      <div class="stage-info"><div class="eyebrow" id="stageNumber">01</div><h3 id="stageTitle"></h3><p id="stageDesc"></p></div>
+    </div>
+    <div class="stage-side" id="stageSide"></div>
+  </div>
+</div>
+</section>
+
+<section id="beauty" style="background:rgba(255,255,255,.018)">
+<div class="container">
+  <div class="section-head"><div><div class="eyebrow">01 / Personal care</div><h2>Health & Beauty</h2></div><p>Purpose-first grooming and skincare tools.</p></div>
+  <div class="filters" id="beautyFilters"></div>
+  <div class="grid" id="beautyGrid"></div>
+</div>
+</section>
+
+<section id="winter">
+<div class="container">
+  <div class="feature">
+    <div class="feature-media"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=85" alt="Warm winter jacket"></div>
+    <div class="feature-copy"><div class="eyebrow">02 / Winter system</div><h2>Warmth that works as hard as you do.</h2><p>Heated workwear and cold-weather essentials.</p>
+      <div class="stats"><div class="stat"><b>USB</b><span>powered heating</span></div><div class="stat"><b>4–6</b><span>heat zones*</span></div><div class="stat"><b>24/7</b><span>smart discovery</span></div></div>
+      <a href="#winterProducts" class="btn gold" style="margin-top:28px">Shop winter →</a>
+    </div>
+  </div>
+  <div class="grid" id="winterProducts" style="margin-top:45px"></div>
+</div>
+</section>
+
+<section id="home" style="background:rgba(255,255,255,.018)">
+<div class="container">
+  <div class="section-head"><div><div class="eyebrow">03 / Environment</div><h2>Home, but smarter.</h2></div><p>Ambient lighting, projection and charging pieces.</p></div>
+  <div class="feature">
+    <div class="feature-copy"><h2>Technology should disappear into the room.</h2><p>Useful technology as part of the interior.</p><a href="#tech" class="btn gold" style="margin-top:28px">Explore smart tech →</a></div>
+    <div class="feature-media"><img src="https://images.unsplash.com/photo-1507473885765-e6ed557afd91?auto=format&fit=crop&w=1200&q=85" alt="Modern ambient lamp"></div>
+  </div>
+</div>
+</section>
+
+<section id="spotlight" style="padding:40px 0 20px">
+<div class="container">
+  <div style="position:relative;border-radius:28px;overflow:hidden;border:1px solid var(--line);min-height:480px;background:#0b0c10;margin-bottom:18px">
+    <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1200&q=85" alt="Laser Level 360 Self Leveling" style="position:absolute;right:0;top:0;width:58%;height:100%;object-fit:cover">
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,9,12,.96) 0%,rgba(8,9,12,.88) 38%,rgba(8,9,12,.25) 68%,transparent 100%)"></div>
+    <div style="position:relative;z-index:2;padding:48px 40px;max-width:520px">
+      <div class="eyebrow" style="display:inline-flex;background:rgba(232,199,106,.15);padding:6px 12px;border-radius:999px;margin-bottom:18px">TRENDING</div>
+      <h2 style="font-size:clamp(32px,4vw,48px);line-height:1.05;margin-bottom:14px">Laser Level 360°<br><span style="color:var(--gold)">Self Leveling</span></h2>
+      <p style="color:var(--muted);font-size:14px;max-width:420px;margin-bottom:22px">4D laser technology with tripod, 16-line coverage and self-leveling.</p>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:22px">
+        <span style="font-size:28px;font-weight:800;color:var(--gold)">R 3 428,05</span>
+        <span style="color:var(--muted);text-decoration:line-through">R 4 999,00</span>
+        <span style="background:#e74c3c;color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px">-31%</span>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn gold" onclick="addCart('g5')">Add to Cart</button>
+        <button class="btn ghost" onclick="openProduct('g5')">View Details →</button>
+      </div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px" class="spotlight-cards">
+    <article class="product" onclick="openProduct('g7')" style="cursor:pointer;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--panel)">
+      <div style="position:relative;aspect-ratio:16/10;background:#0b0c10">
+        <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1000&q=85" alt="Dual Lens 4K Dash Camera" style="width:100%;height:100%;object-fit:cover">
+        <span class="pill" style="position:absolute;top:12px;left:12px">BEST SELLER</span>
+      </div>
+      <div style="padding:18px 20px 22px">
+        <h3 style="font-size:18px;margin-bottom:4px">Dual Lens 4K Dash Camera</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Front & Rear · Loop Recording · Night Vision</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <div><span style="font-size:20px;font-weight:800;color:var(--gold)">R 1 249,00</span> <span style="color:var(--muted);text-decoration:line-through;font-size:13px">R 1 799,00</span></div>
+          <button class="btn gold" style="padding:10px 16px" onclick="event.stopPropagation();addCart('g7')">Add to Cart</button>
+        </div>
+      </div>
+    </article>
+    <article class="product" onclick="openProduct('g9')" style="cursor:pointer;border:1px solid var(--line);border-radius:24px;overflow:hidden;background:var(--panel)">
+      <div style="position:relative;aspect-ratio:16/10;background:#0b0c10">
+        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1000&q=85" alt="Smart Car Cup-Holder Air Purifier" style="width:100%;height:100%;object-fit:cover">
+        <span class="pill" style="position:absolute;top:12px;left:12px;color:#77e2ae">NEW</span>
+      </div>
+      <div style="padding:18px 20px 22px">
+        <h3 style="font-size:18px;margin-bottom:4px">Smart Car Cup-Holder Air Purifier</h3>
+        <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Fresh Air · Odour Elimination · USB Powered</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <div><span style="font-size:20px;font-weight:800;color:var(--gold)">R 599,00</span> <span style="color:var(--muted);text-decoration:line-through;font-size:13px">R 899,00</span></div>
+          <button class="btn gold" style="padding:10px 16px" onclick="event.stopPropagation();addCart('g9')">Add to Cart</button>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+</section>
+<style>@media(max-width:900px){.spotlight-cards{grid-template-columns:1fr !important}}</style>
+
+<section id="tech">
+<div class="container">
+  <div class="section-head"><div><div class="eyebrow">04 / Smart living</div><h2>Gadgets & Tech</h2></div><p>Wearables, drones, measuring tools, vehicle tech and organisers.</p></div>
+  <div class="filters" id="techFilters"></div>
+  <div class="grid" id="techGrid"></div>
+</div>
+</section>
+
+<section>
+<div class="container">
+  <div class="newsletter"><div><div class="eyebrow">Private access</div><h2>Join the universe.</h2><p>New drops, price changes and useful product discoveries.</p></div>
+  <form class="email" id="subscribe"><input type="email" required placeholder="Your email address"><button class="btn gold">Subscribe</button></form></div>
+</div>
+</section>
+</main>
+
+<footer><div class="container footer-grid">
+  <div><a class="logo" href="#">Elegance<i>.</i></a><p style="margin-top:12px;max-width:330px">Modern health, home, winter and technology essentials. Prices in ZAR.</p></div>
+  <div><h4>Explore</h4><a href="#discover">Discover</a><a href="#beauty">Beauty</a><a href="#winter">Winter</a><a href="#home">Home</a><a href="#tech">Tech</a></div>
+  <div><h4>Support</h4><a href="#">Shipping</a><a href="#">Returns</a><a href="#">FAQ</a><a href="#">Contact</a></div>
+  <div><h4>Store</h4><a href="#">About</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+</div><div class="container" style="border-top:1px solid var(--line);margin-top:35px;padding-top:20px">© 2026 Elegance Universe</div></footer>
+
+<div class="modal" id="quick"><div class="backdrop" data-close="quick"></div><div class="modal-card"><button class="close" data-close="quick">×</button><div class="modal-grid"><div class="modal-img"><img id="quickImg" src="" alt=""></div><div class="modal-copy"><div class="eyebrow" id="quickCat"></div><h2 id="quickTitle" style="font-size:38px;line-height:1.05"></h2><div id="quickPrice" style="color:var(--gold);font-weight:800;font-size:23px;margin:16px 0"></div><p id="quickDesc" style="color:var(--muted);font-size:14px"></p><p id="quickSupplier" style="color:var(--muted);font-size:11px;margin-top:20px"></p><button class="btn gold" id="quickAdd" style="margin-top:30px;width:100%">Add to cart</button></div></div></div></div>
+
+<aside class="drawer" id="drawer"><div class="drawer-head"><h2>Your cart</h2><button class="icon-btn" id="cartClose">×</button></div><div class="cart-items" id="cartItems"></div><div class="total"><div class="total-line"><span>Subtotal</span><b id="cartTotal">R0</b></div><button class="btn gold" style="width:100%" id="checkout">Checkout</button><p style="text-align:center;color:var(--muted);font-size:11px;margin-top:10px">Demo checkout — connect Shopify here.</p></div></aside>
+
+<div class="search" id="search"><div class="backdrop" data-close="search"></div><div class="search-box"><input id="searchInput" placeholder="Search products…"><div class="results" id="results"></div></div></div>
+
+<script>
+const products=[
+{id:'b1',cat:'beauty',tag:'BESTSELLER',name:'5-in-1 Electric Lady Shaver Kit',price:820,compare:985,image:'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=800&q=85',desc:'Multi-function wet/dry personal-care kit.',supplier:'Beauty equipment'},
+{id:'b2',cat:'beauty',tag:'COOLING',name:'High-Frequency Vibration Cooling Facial Roller',price:495,compare:585,image:'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=800&q=85',desc:'Cooling roller for depuffing.',supplier:'Facial-care equipment'},
+{id:'b3',cat:'beauty',tag:'NO GLUE',name:'3D Silk Magnetic Eyelash & Eyeliner Kit',price:415,compare:500,image:'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=800&q=85',desc:'Reusable magnetic lashes.',supplier:'Qingdao eyelash manufacturers'},
+{id:'b4',cat:'beauty',tag:'SCALP CARE',name:'Rosemary Hair & Scalp Oil',price:350,compare:450,image:'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=85',desc:'Rosemary-based scalp oil.',supplier:'Guangzhou cosmetics labs'},
+{id:'w1',cat:'winter',tag:'HEATED',name:'USB Powered Heated Work Jacket',price:1980,compare:2485,image:'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1000&q=85',desc:'Heated workwear for cold conditions.',supplier:'Zhejiang functional apparel'},
+{id:'g1',cat:'tech',tag:'WEARABLE',name:'Smart Health Ring — Sleep & Heart Rate',price:1390,compare:1650,image:'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?auto=format&fit=crop&w=900&q=85',desc:'Sleep, heart-rate and activity tracking.',supplier:'Shenzhen wearable ODMs'},
+{id:'g2',cat:'tech',tag:'TRAVEL',name:'Waterproof Electronic Cable Organizer Bag',price:360,compare:415,image:'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=900&q=85',desc:'Protective organiser for cables.',supplier:'Yiwu textile'},
+{id:'g3',cat:'tech',tag:'4K + GPS',name:'Budget 4K GPS Folding Drone',price:2950,compare:3800,image:'https://images.unsplash.com/photo-1473968512647-3e447244af8f?auto=format&fit=crop&w=900&q=85',desc:'Foldable beginner drone with GPS and 4K.',supplier:'Shantou UAV'},
+{id:'g4',cat:'tech',tag:'AMOLED',name:'Bluetooth Calling Smartwatch',price:1250,compare:1650,image:'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=85',desc:'AMOLED smartwatch with Bluetooth calling.',supplier:'Shenzhen smartwatch ODMs'},
+{id:'g5',cat:'tech',tag:'TRENDING',name:'Laser Level 360° Self Leveling',price:3428,compare:4999,image:'https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1200&q=85',desc:'4D laser with tripod, 16-line coverage and self-leveling.',supplier:'Dingyue Measuring Tools'},
+{id:'g6',cat:'tech',tag:'ELECTRICAL',name:'Smart GFCI Receptacle / Outlet Tester',price:475,compare:600,image:'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=900&q=85',desc:'Digital outlet tester with GFCI trip.',supplier:'Ningbo electrical'},
+{id:'g7',cat:'tech',tag:'BEST SELLER',name:'Dual Lens 4K Dash Camera',price:1249,compare:1799,image:'https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=1000&q=85',desc:'Front & Rear · Loop Recording · Night Vision.',supplier:'Shenzhen auto electronics'},
+{id:'g8',cat:'tech',tag:'QI CHARGING',name:'Automatic Clamping Qi Wireless Car Charger',price:625,compare:750,image:'https://images.unsplash.com/photo-1587033411391-5d9e51cce126?auto=format&fit=crop&w=900&q=85',desc:'Auto-clamping wireless Qi charger mount.',supplier:'Mobile accessories ODMs'},
+{id:'g9',cat:'tech',tag:'NEW',name:'Smart Car Cup-Holder Air Purifier',price:599,compare:899,image:'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1000&q=85',desc:'Fresh Air · Odour Elimination · USB Powered.',supplier:'Ningbo vehicle appliances'}
+];
+
+const collections=[
+{title:'Health & Beauty',desc:'Personal care tools for real grooming use cases.',image:products[0].image,cat:'beauty'},
+{title:'Winter Essentials',desc:'Functional heated apparel and cold-weather equipment.',image:products[4].image,cat:'winter'},
+{title:'Home & Atmosphere',desc:'Lighting and design-led technology.',image:'https://images.unsplash.com/photo-1507473885765-e6ed557afd91?auto=format&fit=crop&w=1200&q=85',cat:'home'},
+{title:'Smart Gadgets',desc:'Wearables, drones, vehicle tech and tools.',image:products[9].image,cat:'tech'}
+];
+
+const memoryStore={};
+function safeGet(k){try{return localStorage.getItem(k)}catch(e){return memoryStore[k]||null}}
+function safeSet(k,v){try{localStorage.setItem(k,v)}catch(e){memoryStore[k]=v}}
+let cart=[];try{cart=JSON.parse(safeGet('elegance_cart')||'[]')||[]}catch(e){cart=[]};
+let currentStage=0, autoOn=true, stageTimer, heroIndex=0;
+
+const $=id=>document.getElementById(id);
+function zar(n){return 'R'+Number(n).toLocaleString('en-ZA')}
+function safeImg(img,fallback='https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80'){img.onerror=()=>{img.onerror=null;img.src=fallback}}
+function productCard(p){
+ return `<article class="product" onclick="openProduct('${p.id}')"><div class="product-image">
+ <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="safeImg(this)">
+ <span class="pill">${p.tag}</span><button class="heart" onclick="event.stopPropagation();toggleWish(this)">♡</button></div>
+ <h3>${p.name}</h3><div><span class="price">${zar(p.price)}</span>${p.compare?` <span class="old">${zar(p.compare)}</span>`:''}</div></article>`
+}
+function renderProducts(cat,el,filter='all'){
+ const list=products.filter(p=>p.cat===cat && (filter==='all'||p.tag===filter));
+ $(el).innerHTML=list.map(productCard).join('');
+}
+function renderFilters(cat,el){
+ const tags=['all',...new Set(products.filter(p=>p.cat===cat).map(p=>p.tag))];
+ $(el).innerHTML=tags.map((t,i)=>`<button class="filter ${i===0?'active':''}" data-filter="${t}">${t==='all'?'All':t}</button>`).join('');
+ $(el).querySelectorAll('.filter').forEach(b=>b.onclick=()=>{
+   $(el).querySelectorAll('.filter').forEach(x=>x.classList.remove('active'));b.classList.add('active');
+   renderProducts(cat,el.replace('Filters','Grid'),b.dataset.filter);
+ });
+}
+function setStage(i){
+ currentStage=i%collections.length;const c=collections[currentStage];
+ $('stageImage').src=c.image;$('stageImage').alt=c.title;$('stageNumber').textContent='0'+(currentStage+1);
+ $('stageTitle').textContent=c.title;$('stageDesc').textContent=c.desc;
+ $('stageSide').innerHTML=collections.map((x,n)=>n===currentStage?'':`<div class="mini" onclick="setStage(${n})"><img src="${x.image}" alt="${x.title}" onerror="safeImg(this)"><div class="mini-info"><span>0${n+1}</span><h3>${x.title}</h3></div></div>`).slice(0,2).join('');
+}
+function startStage(){clearInterval(stageTimer);if(autoOn)stageTimer=setInterval(()=>setStage(currentStage+1),5000)}
+$('autoSwitch').onclick=()=>{autoOn=!autoOn;$('autoSwitch').classList.toggle('on',autoOn);startStage()};
+setStage(0);startStage();
+
+const heroData=[
+['01 / Beauty intelligence','Better rituals.<br>Smarter living.','A curated universe of useful technology, elevated personal care, warm essentials and design-led home pieces.'],
+['02 / Winter system','Warmth that<br>works harder.','Functional cold-weather essentials.'],
+['03 / Home intelligence','Make space<br>feel better.','Design-led lighting and ambient technology.'],
+['04 / Smart living','Technology,<br>made useful.','From wearables to vehicle tech and professional tools.']
+];
+const slides=[...document.querySelectorAll('.hero-slide')];
+heroData.forEach((d,i)=>{const b=document.createElement('button');b.className='dot'+(i===0?' active':'');b.onclick=()=>setHero(i);$('heroControls').appendChild(b)});
+function setHero(i){heroIndex=i%slides.length;slides.forEach((s,n)=>s.classList.toggle('active',n===heroIndex));$('heroEyebrow').textContent=heroData[heroIndex][0];$('heroTitle').innerHTML=heroData[heroIndex][1];$('heroCopy').textContent=heroData[heroIndex][2];document.querySelectorAll('.dot').forEach((d,n)=>d.classList.toggle('active',n===heroIndex))}
+setInterval(()=>setHero(heroIndex+1),6500);
+
+renderFilters('beauty','beautyFilters');renderProducts('beauty','beautyGrid');
+renderFilters('tech','techFilters');renderProducts('tech','techGrid');
+renderProducts('winter','winterProducts');
+
+function openProduct(id){
+ const p=products.find(x=>x.id===id);if(!p)return;
+ $('quickImg').src=p.image;$('quickImg').alt=p.name;$('quickCat').textContent=p.cat+' / '+p.tag;$('quickTitle').textContent=p.name;$('quickPrice').textContent=zar(p.price);$('quickDesc').textContent=p.desc;$('quickSupplier').textContent='Sourced via: '+p.supplier;
+ $('quickAdd').onclick=()=>{addCart(p.id);closeModal('quick')};$('quick').classList.add('open');safeImg($('quickImg'));
+}
+function closeModal(id){$(id).classList.remove('open')}
+document.querySelectorAll('[data-close]').forEach(x=>x.onclick=()=>{if(x.dataset.close==='quick')closeModal('quick');if(x.dataset.close==='search')closeSearch()});
+function addCart(id){const p=products.find(x=>x.id===id),row=cart.find(x=>x.id===id);if(row)row.qty++;else cart.push({id,qty:1});safeSet('elegance_cart',JSON.stringify(cart));renderCart();$('drawer').classList.add('open')}
+function renderCart(){
+ $('cartCount').textContent=cart.reduce((a,x)=>a+x.qty,0);
+ $('cartItems').innerHTML=cart.length?cart.map(x=>{const p=products.find(y=>y.id===x.id);return `<div class="cart-row"><img src="${p.image}" alt="${p.name}" onerror="safeImg(this)"><div><b style="font-size:13px">${p.name}</b><small style="display:block">${zar(p.price)} × ${x.qty}</small><button onclick="removeCart('${p.id}')" style="font-size:11px;color:var(--muted);margin-top:7px">Remove</button></div><b style="color:var(--gold)">${zar(p.price*x.qty)}</b></div>`}).join(''):'<p style="color:var(--muted);text-align:center;padding:50px 0">Your cart is empty.</p>';
+ $('cartTotal').textContent=zar(cart.reduce((a,x)=>{const p=products.find(y=>y.id===x.id);return a+p.price*x.qty},0));
+}
+function removeCart(id){cart=cart.filter(x=>x.id!==id);safeSet('elegance_cart',JSON.stringify(cart));renderCart()}
+function toggleWish(b){b.textContent=b.textContent==='♡'?'♥':'♡';b.style.color=b.textContent==='♥'?'var(--gold)':''}
+renderCart();
+$('cartBtn').onclick=()=>$('drawer').classList.add('open');$('cartClose').onclick=()=>$('drawer').classList.remove('open');
+$('checkout').onclick=()=>alert('Demo checkout ready — connect your Shopify or WooCommerce checkout here.');
+
+$('themeBtn').onclick=()=>{document.body.classList.toggle('light');safeSet('elegance_theme',document.body.classList.contains('light')?'light':'dark')};
+if(safeGet('elegance_theme')==='light')document.body.classList.add('light');
+
+function closeSearch(){$('search').classList.remove('open');$('searchInput').value='';$('results').innerHTML=''}
+$('searchBtn').onclick=()=>{$('search').classList.add('open');setTimeout(()=>$('searchInput').focus(),50)};
+$('searchInput').oninput=e=>{
+ const q=e.target.value.toLowerCase().trim();
+ if(!q){$('results').innerHTML='';return}
+ const hits=products.filter(p=>(p.name+' '+p.desc+' '+p.cat+' '+p.tag).toLowerCase().includes(q)).slice(0,7);
+ $('results').innerHTML=hits.length?hits.map(p=>`<div class="result" onclick="closeSearch();openProduct('${p.id}')"><b>${p.name}</b><small style="display:block;color:var(--muted)">${p.cat} · ${zar(p.price)}</small></div>`).join(''):'<div style="color:var(--muted);padding:12px">No products matched that search.</div>'
+};
+$('subscribe').onsubmit=e=>{e.preventDefault();alert('Thanks — subscription demo activated.')};
+$('mobileBtn').onclick=()=>{document.querySelector('.navlinks').style.display=document.querySelector('.navlinks').style.display==='flex'?'none':'flex';document.querySelector('.navlinks').style.position='absolute';document.querySelector('.navlinks').style.top='72px';document.querySelector('.navlinks').style.right='14px';document.querySelector('.navlinks').style.padding='18px';document.querySelector('.navlinks').style.flexDirection='column';document.querySelector('.navlinks').style.background='var(--panel)';document.querySelector('.navlinks').style.border='1px solid var(--line)';document.querySelector('.navlinks').style.borderRadius='18px'};
+window.addEventListener('scroll',()=>$('nav').classList.toggle('scrolled',scrollY>30));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal('quick');closeSearch();$('drawer').classList.remove('open')}});
+
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){autoOn=false;$('autoSwitch').classList.remove('on')}
+</script>
+</body>
+</html>
