@@ -1,20 +1,27 @@
 # elegence2
 
-**Elegance Universe** — Intelligent Modern Living storefront (ZAR).
+**Elegance Universe** — Intelligent Modern Living storefront (ZAR pricing).
 
 ## Live site
 
-Enable GitHub Pages: **Settings → Pages → Source: Deploy from branch → main / root**
+1. Open **Settings → Pages**
+2. Source: **Deploy from a branch**
+3. Branch: **main** / folder: **/ (root)**
+4. Save — live at:
 
-Then open: https://sepengpholo.github.io/elegence2/
+**https://sepengpholo.github.io/elegence2/**
 
-## Files
+## Repo
 
-- `index.html` — full storefront
-- `product-laser-level.jpg` — Laser Level 360° product image
-- `product-dash-cam.jpg` — Dual Lens 4K Dash Camera
-- `product-air-purifier.jpg` — Smart Car Cup-Holder Air Purifier
+https://github.com/Sepengpholo/elegence2
 
-## Local preview
+## Features
 
-Open `index.html` in a browser (all assets are relative).
+- Health & Beauty, Winter, Home, Tech catalogs
+- Laser Level / Dash Cam / Air Purifier spotlight
+- Cart, search, theme toggle, quick-view modal
+- ZAR pricing
+
+## Local
+
+Open `index.html` in any browser.
